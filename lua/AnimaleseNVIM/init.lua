@@ -37,7 +37,7 @@ local M = {}
 function M.setup(opts)
 	opts = opts or {}
 
-	M.options.style = normalize_style(opts.style)
+	opts.style = normalize_style(opts.style)
 
 	vim.keymap.set("n", "<Leader>j", function()
 		print(opts.style)
