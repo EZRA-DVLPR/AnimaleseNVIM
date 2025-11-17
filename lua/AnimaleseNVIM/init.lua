@@ -26,7 +26,7 @@ local function normalize_style(style)
 	end
 
 	vim.notify(
-		string.format("AnimaleseNVIM: Invalid style '%s', using default '%s'", style, DEFAULT_STYLE),
+		string.format("AnimaleseNVIM Invalid style '%s', using default '%s'", style, DEFAULT_STYLE),
 		vim.log.levels.WARN
 	)
 	return DEFAULT_STYLE
@@ -39,6 +39,7 @@ function M.setup(opts)
 
 	opts.style = normalize_style(opts.style)
 
+	--TODO: have option to be able to turn on and off
 	vim.keymap.set("n", "<Leader>j", function()
 		print(opts.style)
 	end)
