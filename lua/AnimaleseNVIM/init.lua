@@ -1,14 +1,46 @@
+local VALID_STYLES = {
+	-- a-z
+	alpha = true,
+
+	-- 0-9a-z
+	alnum = true,
+
+	-- a-z{*}
+	al_symb = true,
+
+	-- 0-9a-z{*}
+	alnum_symb = true,
+}
+
+local DEFAULT_STYLE = "alnum_symb"
+
+local function normalize_style(style)
+	-- return default if input is not valid
+	if not style then
+		return DEFAULT_STYLE
+	end
+
+	--return style if input is valid
+	if VALID_STYLES[style] then
+		return style
+	end
+
+	vim.notify(
+		string.format("AnimaleseNVIM: Invalid style '%s', using default '%s'", style, DEFAULT_STYLE),
+		vim.log.levels.WARN
+	)
+	return DEFAULT_STYLE
+end
+
 local M = {}
 
 function M.setup(opts)
 	opts = opts or {}
 
+	M.options.style = normalize_style(opts.style)
+
 	vim.keymap.set("n", "<Leader>j", function()
-		if opts.name then
-			print("hello, " .. opts.name)
-		else
-			print("hello")
-		end
+		print(opts.style)
 	end)
 end
 
